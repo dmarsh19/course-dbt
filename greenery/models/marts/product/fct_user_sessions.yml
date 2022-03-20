@@ -1,0 +1,8 @@
+version: 2
+
+models:
+  - name: fct_user_sessions
+    columns:
+      - name: session_length_minutes
+        tests:
+          - not_null
