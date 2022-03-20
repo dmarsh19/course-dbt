@@ -22,9 +22,6 @@ sources:
         columns:
           - name: user_id
             description: Primary key for users
-            tests:
-              - unique
-              - not_null
           - name: first_name
           - name: last_name
           - name: email
