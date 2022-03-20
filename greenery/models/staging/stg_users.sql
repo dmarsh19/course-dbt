@@ -1,9 +1,3 @@
-{{
-    config(
-        materialized='view'
-    )
-}}
-
 SELECT
     user_id as user_guid,
     first_name,

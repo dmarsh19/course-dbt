@@ -1,9 +1,3 @@
-{{
-    config(
-        materialized='view'
-    )
-}}
-
 SELECT
     address_id as address_guid,
     address,

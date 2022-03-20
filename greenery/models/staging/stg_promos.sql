@@ -1,9 +1,3 @@
-{{
-    config(
-        materialized='view'
-    )
-}}
-
 SELECT
     promo_id,
     discount as discount_usd,

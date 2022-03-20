@@ -1,9 +1,3 @@
-{{
-    config(
-        materialized='view'
-    )
-}}
-
 SELECT
     order_id as order_guid,
     promo_id,
