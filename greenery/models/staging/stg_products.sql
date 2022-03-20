@@ -5,9 +5,9 @@
 }}
 
 SELECT
-    product_id,
+    product_id as product_guid,
     name,
-    price,
+    price as price_usd,
     inventory
 FROM
     {{ source('src_postgres', 'products') }}

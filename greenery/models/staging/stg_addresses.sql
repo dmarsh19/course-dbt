@@ -5,7 +5,7 @@
 }}
 
 SELECT
-    address_id,
+    address_id as address_guid,
     address,
     zipcode,
     state,
