@@ -1,0 +1,18 @@
+version: 2
+
+models:
+  - name: fct_user_orders
+    columns:
+      - name: num_orders
+        tests:
+          - positive_values
+      - name: total_cost_usd
+        tests:
+          - positive_values
+      - name: total_num_items
+        tests:
+          - positive_values
+      - name: last_order_at_utc
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: '>= first_order_at_utc'
