@@ -1,0 +1,22 @@
+version: 2
+
+models:
+  - name: fct_page_views
+    columns:
+      - name: total_views
+        tests:
+          - positive_values
+      - name: unique_users
+        tests:
+          - positive_values
+          - dbt_utils.expression_is_true:
+              expression: '<= unique_sessions'
+      - name: unique_sessions
+        tests:
+          - positive_values
+          - dbt_utils.expression_is_true:
+              expression: '<= total_views'
+      - name: last_view_at_utc
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: '>= first_view_at_utc'
