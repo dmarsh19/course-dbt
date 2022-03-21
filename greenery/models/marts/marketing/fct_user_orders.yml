@@ -3,6 +3,10 @@ version: 2
 models:
   - name: fct_user_orders
     columns:
+      - name: user_guid
+        tests:
+          - not_null
+          - unique
       - name: num_orders
         tests:
           - positive_values

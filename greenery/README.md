@@ -107,3 +107,28 @@ select
 from
   hourly_sessions;
 ```
+
+### Week 2
+
+#### What is our user repeat rate?
+
+**79.83870967741935**
+
+```sql
+select
+  (count(*) filter (where num_orders > 1) / count(*)::real) * 100
+from
+  dbt_derek_m.fct_user_orders;
+```
+
+#### What are good indicators of a user who will likely purchase again? What about indicators of users who are likely NOT to purchase again? If you had more data, what features would you want to look into to answer this question?
+
+**Good indicators would likely be a user with a high amount of sessions and page views or a user that has used a promo more than once; they are planned buyers and may frequent the site to wait for a deal. Indicators of not purchasing again could be user that has bought the same item more than once; perhaps they had to replace an item or had a bad experience with the first and gave another try. More data that could help answer this question could be reviews on the items linked to user accounts; this would help identify satisfied customers and why they are choosing particular items.**
+
+#### Explain the marts models you added. Why did you organize the models in the way you did?
+
+**fct_user_orders provides order information at the user level. fct_user_sessions provides session information at the user level. fct_page_views provides information about the page views at the url level. I put user order and address information in marketing; the types of items could impact some soft of mailer or promo that marketing would want to send out to users. Information like page views and sessions tell more about the products provided by greenery; how popular a particular product url is and the amount of time user's spend shopping for products affects not just inventory, but the site itself as a product.**
+
+#### dbt docs
+
+<img src="https://github.com/dmarsh19/course-dbt/blob/main/greenery/Screenshot%20from%202022-03-20%2022-10-55.png" height="600" />
