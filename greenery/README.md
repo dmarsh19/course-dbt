@@ -157,7 +157,7 @@ with sessions as (
     session_guid,
     sum(checkout) as checkout
   from
-    dbt_derek_m.int_session_events_agg
+    dbt_derek_m.int_session_user_events_agg
   group by
     1
 )

@@ -14,14 +14,14 @@ with session_length as (
 )
 
 select
-    int_session_events_agg.session_guid,
-    int_session_events_agg.user_guid,
+    int_session_user_events_agg.session_guid,
+    int_session_user_events_agg.user_guid,
     dim_users.first_name,
     dim_users.last_name,
-    int_session_events_agg.page_view,
-    int_session_events_agg.add_to_cart,
-    int_session_events_agg.checkout,
-    int_session_events_agg.package_shipped,
+    int_session_user_events_agg.page_view,
+    int_session_user_events_agg.add_to_cart,
+    int_session_user_events_agg.checkout,
+    int_session_user_events_agg.package_shipped,
     session_length.first_event as first_session_event,
     session_length.last_event as last_session_event,
     (
@@ -30,8 +30,8 @@ select
         date_part('minute', session_length.last_event::timestamp - session_length.first_event::timestamp)
     ) as session_length_minutes
 from
-    {{ ref('int_session_events_agg') }}
+    {{ ref('int_session_user_events_agg') }}
     left join {{ ref('dim_users') }}
-        on int_session_events_agg.user_guid = dim_users.user_guid
+        on int_session_user_events_agg.user_guid = dim_users.user_guid
     left join session_length
-        on int_session_events_agg.session_guid = session_length.session_guid
+        on int_session_user_events_agg.session_guid = session_length.session_guid
