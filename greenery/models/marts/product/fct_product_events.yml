@@ -1,0 +1,8 @@
+version: 2
+
+models:
+  - name: fct_product_events
+    columns:
+      - name: product_guid
+        tests:
+          - not_null

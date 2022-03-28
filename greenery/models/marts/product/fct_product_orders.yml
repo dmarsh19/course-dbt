@@ -1,0 +1,13 @@
+version: 2
+
+models:
+  - name: fct_product_orders
+    columns:
+      - name: quantity_ordered
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: '>= num_orders'
+      - name: last_order_at_utc
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: '>= first_order_at_utc'
