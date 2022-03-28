@@ -12,14 +12,14 @@
 %}
 
 select
-    fe.product_guid,
-    name
+    product_guid,
+    session_guid
     {% for event_type in event_types['event_type'] %}
         , sum(case when event_type = {{ event_type }} then 1 else 0 end) as {{ event_types['column_name'][loop.index0] }}
     {% endfor %}
 from
-    {{ ref('fct_events') }} as fe
-    join {{ ref('dim_products') }} dp
-        on fe.product_guid = dp.product_guid
+    {{ ref('fct_events') }}
+where
+    product_guid is not null
 
 {{ dbt_utils.group_by(2) }}

@@ -10,6 +10,8 @@ SELECT
     user_guid,
     event_type,
     page_url,
-    created_at_utc
+    created_at_utc,
+    order_guid,
+    product_guid
 FROM
     {{ ref('stg_events') }}
