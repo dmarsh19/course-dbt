@@ -169,15 +169,60 @@ from
 
 #### What is our conversion rate by product?
 
-I spent enough time spinning my wheels on this question. Felt I was getting close.
+~~I spent enough time spinning my wheels on this question. Felt I was getting close.~~
+UPDATE 2022-03-28: This was driving me crazy so I took another shot at it
 
-****
+| product name | conversion rate |
+| ----------- | ----------- |
+| String of pearls | 60.9375 |
+| Arrow Head | 55.55555555555556 |
+| Cactus | 54.54545454545454 |
+| ZZ Plant | 53.96825396825397 |
+| Bamboo | 53.73134328358209 |
+| Rubber Plant | 51.85185185185185 |
+| Monstera | 51.02040816326531 |
+| Calathea Makoyana | 50.943396226415096 |
+| Fiddle Leaf Fig | 50 |
+| Majesty Palm | 49.25373134328358 |
+| Aloe Vera | 49.23076923076923 |
+| Devil's Ivy | 48.888888888888886 |
+| Philodendron | 48.38709677419355 |
+| Jade Plant | 47.82608695652174 |
+| Spider Plant | 47.45762711864407 |
+| Pilea Peperomioides | 47.45762711864407 |
+| Dragon Tree | 46.774193548387096 |
+| Money Tree | 46.42857142857143 |
+| Orchid | 45.33333333333333 |
+| Bird of Paradise | 45 |
+| Ficus | 42.64705882352941 |
+| Birds Nest Fern | 42.30769230769231 |
+| Pink Anthurium | 41.891891891891895 |
+| Boston Fern | 41.269841269841265 |
+| Alocasia Polly | 41.17647058823529 |
+| Peace Lily | 40.909090909090914 |
+| Ponytail Palm | 40 |
+| Snake Plant | 39.726027397260275 |
+| Angel Wings Begonia | 39.34426229508197 |
+| Pothos | 34.42622950819672 |
 
 ```sql
+select
+  dp.name,
+  (count(distinct session_guid) filter (where checkout > 0) / (count(distinct session_guid) filter (where page_view > 0))::real) * 100
+from
+  dbt_derek_m.dim_products as dp
+  left join dbt_derek_m.int_session_product_events_agg as spe
+    on dp.product_guid = spe.product_guid
+group by
+  1
+order by
+  2 desc
 ```
 
 #### Why might certain products be converting at higher/lower rates than others? 
 
-****
+**Price trends in comparison to conversion rates are always a good starting point to look at**
+
+#### DAG
 
 <img src="https://github.com/dmarsh19/course-dbt/blob/main/greenery/dag2.png" height="600" />
