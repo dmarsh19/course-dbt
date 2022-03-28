@@ -35,3 +35,7 @@ models:
   greenery:
     staging:
       +materialized: view
+
+    +post-hook: "{{ grant_read('reporting') }}"
+
+on-run-end: "grant usage on schema {{schema}} to reporting"
