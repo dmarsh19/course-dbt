@@ -144,3 +144,40 @@ Didn't catch bad data, but I did go back to a previously written model (marketin
 #### Your stakeholders at Greenery want to understand the state of the data each day. Explain how you would ensure these tests are passing regularly and how you would alert stakeholders about bad data getting through.
 
 I would start with Github Actions running `dbt build` daily and notifying on failure or bad exit code. This would run all the tests and rebuild data regularly. If more advanced logic or a DAG system like Airflow or Dagster were already used in the environment, that would also be a good option.
+
+### Week 3
+
+#### What is our overall conversion rate?
+
+**62.45674740484429**
+
+```sql
+with sessions as (
+  select
+    session_guid,
+    sum(checkout) as checkout
+  from
+    dbt_derek_m.int_session_events_agg
+  group by
+    1
+)
+select
+  (count(*) filter (where checkout > 0) / count(*)::real) * 100
+from
+  sessions;
+```
+
+#### What is our conversion rate by product?
+
+I spent enough time spinning my wheels on this question. Felt I was getting close.
+
+****
+
+```sql
+```
+
+#### Why might certain products be converting at higher/lower rates than others? 
+
+****
+
+<img src="https://github.com/dmarsh19/course-dbt/blob/main/greenery/dag2.png" height="600" />
